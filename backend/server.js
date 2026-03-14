@@ -50,8 +50,8 @@ app.use('/api/admin', adminRoutes);
 // Serve static files in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/build')));
-  // Use '/*' for compatibility with newer express/path-to-regexp versions
-  app.get('/*', (req, res) => {
+  // Catch-all route to serve React app
+  app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
   });
 }
