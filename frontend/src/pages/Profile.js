@@ -10,19 +10,6 @@ function Profile() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchUserAndDonations();
-    
-    // Also listen for storage changes to detect when donations are made from receipt page
-    const handleStorageChange = () => {
-      console.log('Storage changed, refreshing donations...');
-      fetchUserAndDonations();
-    };
-    
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, [navigate, fetchUserAndDonations]);
-
   const fetchUserAndDonations = useCallback(async () => {
     try {
       setLoading(true);
@@ -71,6 +58,19 @@ function Profile() {
       setLoading(false);
     }
   }, [navigate]);
+
+  useEffect(() => {
+    fetchUserAndDonations();
+    
+    // Also listen for storage changes to detect when donations are made from receipt page
+    const handleStorageChange = () => {
+      console.log('Storage changed, refreshing donations...');
+      fetchUserAndDonations();
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, [navigate, fetchUserAndDonations]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');

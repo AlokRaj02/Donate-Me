@@ -11,33 +11,6 @@ function Receipt() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const getCharityName = (d) => {
-    if (!d) return 'Red Cross';
-    if (d.charity) {
-      if (typeof d.charity === 'string') return d.charity;
-      if (d.charity.name) return d.charity.name;
-    }
-    return 'Red Cross';
-  };
-
-  const getCharityCategory = (d) => {
-    if (!d) return '';
-    const raw = d.charity && (typeof d.charity === 'string' ? '' : d.charity.category);
-    if (!raw) return '';
-    return raw.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase());
-  };
-
-  useEffect(() => {
-    // Prefer donation passed via navigation state (from DonationForm)
-    if (location && location.state && location.state.donation) {
-      setDonation(location.state.donation);
-      setLoading(false);
-      return;
-    }
-
-    fetchDonation();
-  }, [donationId, location, fetchDonation]);
-
   const fetchDonation = useCallback(async () => {
     try {
       // First try to fetch from the backend
@@ -83,6 +56,33 @@ function Receipt() {
       setLoading(false);
     }
   }, [donationId]);
+
+  const getCharityName = (d) => {
+    if (!d) return 'Red Cross';
+    if (d.charity) {
+      if (typeof d.charity === 'string') return d.charity;
+      if (d.charity.name) return d.charity.name;
+    }
+    return 'Red Cross';
+  };
+
+  const getCharityCategory = (d) => {
+    if (!d) return '';
+    const raw = d.charity && (typeof d.charity === 'string' ? '' : d.charity.category);
+    if (!raw) return '';
+    return raw.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase());
+  };
+
+  useEffect(() => {
+    // Prefer donation passed via navigation state (from DonationForm)
+    if (location && location.state && location.state.donation) {
+      setDonation(location.state.donation);
+      setLoading(false);
+      return;
+    }
+
+    fetchDonation();
+  }, [donationId, location, fetchDonation]);
 
   const downloadReceipt = () => {
     if (!donation) return;
