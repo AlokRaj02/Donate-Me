@@ -8,7 +8,7 @@ const path = require('path');
 require('dotenv').config({ path: require('path').resolve(__dirname, '.env') });
 
 // Set defaults if not loaded
-process.env.MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://alokraj629946_db_user:9472%40Alok@cluster0.svonouw.mongodb.net/?appName=Cluster0';
+process.env.MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/donation-platform';
 process.env.PORT = process.env.PORT || '5000';
 process.env.JWT_SECRET = process.env.JWT_SECRET || 'your_super_secret_jwt_key_here_make_it_long_and_random_123456789';
 // Note: FRONTEND_URL is optional in production. If not set, CORS will allow all origins.
