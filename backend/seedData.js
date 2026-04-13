@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 require('dotenv').config({ path: require('path').resolve(__dirname, '.env') });
 
 // Set defaults if not loaded
-process.env.MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://alokraj629946_db_user:9472%40Alok@cluster0.svonouw.mongodb.net/donation-platform?retryWrites=true&w=majority';
+process.env.MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://alokraj629946_db_user:9472%40Alok@cluster0.svonouw.mongodb.net/?appName=Cluster0';
 
 const sampleCharities = [
   {
@@ -92,7 +92,7 @@ async function seedDatabase() {
       console.log('Added sample user: seeduser@example.com (password: password123)');
 
     // Create an admin user
-    const adminPassword = 'admin123';
+    const adminPassword = 'Vs2312@lpu';
     const adminHashed = await bcrypt.hash(adminPassword, 10);
     const adminUser = new User({
       name: 'Alok',
@@ -101,7 +101,7 @@ async function seedDatabase() {
       isAdmin: true
     });
     await adminUser.save();
-    console.log('Added admin user: alok@gmail.com (password: admin123)');
+    console.log('Added admin user: alok@gmail.com (password: Vs2312@lpu)');
 
     console.log('Database seeded successfully!');
     process.exit(0);
